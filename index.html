@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о самолетах</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        #logo {
+            transition: transform 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        #logo:hover {
+            transform: scale(1.1);
+            color: #fff700;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        #menuButton {
+            display: none;
+            background: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #navList {
+            display: flex;
+            flex-direction: column;
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+
+        #navList.show {
+            max-height: 200px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        section {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+
+        .slider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            transition: opacity 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        #prevSlide, #nextSlide {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #prevSlide {
+            left: 10px;
+        }
+
+        #nextSlide {
+            right: 10px;
+        }
+
+        aside {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background: #333;
+            color: white;
+            position: relative;
+        }
+
+        @media (max-width: 768px) {
+            #menuButton {
+                display: block;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            main {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                font-size: 1.2em;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1 id="logo">Информация о самолетах</h1>
+    <nav>
+        <button id="menuButton">Меню</button>
+        <ul id="navList">
+            <li><a href="#boeing737">Boeing 737-800</a></li>
+            <li><a href="#airbusA319">Airbus A319</a></li>
+            <li><a href="#embraerE195">Embraer E195</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div class="slider">
+        <section id="boeing737" class="slide active">
+            <header><h2>Boeing 737-800</h2></header>
+            <article><p>Боинг 737-800 - это узкофюзеляжный коротко- и среднефлотный пассажирский самолет, который стал одной из самых популярных моделей в мире.</p></article>
+            <footer><time datetime="1997-01-01">Введен в эксплуатацию: 1997 год</time></footer>
+        </section>
+        <section id="airbusA319" class="slide">
+            <header><h2>Airbus A319</h2></header>
+            <article><p>Airbus A319 - это один из модификаций семейства Airbus A320, предоставляет высокоэффективные возможности для коротких и средних перелетов.</p></article>
+            <footer><time datetime="1995-01-01">Введен в эксплуатацию: 1995 год</time></footer>
+        </section>
+        <section id="embraerE195" class="slide">
+            <header><h2>Embraer E195</h2></header>
+            <article><p>Embraer E195 - это реактивный самолет с узким фюзеляжем, предназначенный для перевозки пассажиров на короткие и средние дистанции.</p></article>
+            <footer><time datetime="2004-01-01">Введен в эксплуатацию: 2004 год</time></footer>
+        </section>
+        <button id="prevSlide">❮</button>
+        <button id="nextSlide">❯</button>
+    </div>
+
+    <aside>
+        <h3>Полезные ссылки</h3>
+        <ul>
+            <li><a href="https://www.boeing.com/">Boeing</a></li>
+            <li><a href="https://www.airbus.com/">Airbus</a></li>
+            <li><a href="https://www.embraer.com/">Embraer</a></li>
+        </ul>
+    </aside>
+</main>
+
+<footer>
+    <p>© 2023 Информация о самолетах. Все права защищены.</p>
+</footer>
+
+<script>
+    // Анимация для выпадающего меню
+    document.getElementById('menuButton').addEventListener('click', () => {
+        document.getElementById('navList').classList.toggle('show');
+    });
+
+    // Слайдер для самолётов
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    document.getElementById('nextSlide').addEventListener('click', () => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    });
+    document.getElementById('prevSlide').addEventListener('click', () => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+    });
+</script>
+
+</body>
+</html>
